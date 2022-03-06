@@ -1,3 +1,6 @@
+import Nat "mo:base/Nat";
+import Array "mo:base/Array";
+
 actor {
     public func greet(name : Text) : async Text {
         return "Hello, " # name # "!";
@@ -78,7 +81,28 @@ actor {
     };
 
     // remove_from_array
-    public func remove_from_array() : async [Nat] {
+    public func remove_from_array(arr : [Nat], n : Nat) : async [Nat] {
+        let filter = func (x : Nat) : Bool {
+            return x != n;
+        };
+        let newArr : [Nat] = Array.filter(arr, filter);
+        return newArr;
+    };
 
+    // remove_from_array2
+    public func remove_from_array2(arr : [Nat], n : Nat) : async [Nat] {
+        var res : [Nat] = [];
+        for (val in arr.vals()) {
+            if (val != n) {
+                res := Array.append(res, [val]);
+                // res := Array.append<Nat>(res, [val]) : [Nat];
+            };
+        };
+        return res;
+    };
+
+    // selection_sort
+    public func selection_sort(arr : [Nat]) : async [Nat] {
+        return Array.sort(arr, Nat.compare);
     };
 };

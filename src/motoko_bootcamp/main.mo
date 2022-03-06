@@ -35,4 +35,50 @@ actor {
         counter := 0;
     };
 
+    // divide
+    public func divide(n : Nat, m : Nat) : async Bool {
+        if (n % m == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    // is_even
+    public func is_even(n : Nat) : async Bool {
+        if (n % 2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    // sum_of_array
+    public func sum_of_array(arr : [Nat]) : async Nat {
+        var sum : Nat = 0;
+        for (value in arr.vals()) {
+            sum += value;
+        };
+        return sum;
+    };
+
+    // maximum
+    public func maximum(arr : [Nat]) : async Nat {
+        if (arr.size() != 0) {
+            var max : Nat = 0;
+            for (value in arr.vals()) {
+                if (max < value) {
+                    max := value;
+                };
+            };
+            return max;
+        } else {
+            return 0;
+        };
+    };
+
+    // remove_from_array
+    public func remove_from_array() : async [Nat] {
+
+    };
 };

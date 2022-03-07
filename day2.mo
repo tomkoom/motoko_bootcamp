@@ -1,3 +1,4 @@
+import Char "mo:base/Char";
 import Nat "mo:base/Nat";
 import Nat8 "mo:base/Nat8";
 import Text "mo:base/Text";
@@ -30,6 +31,54 @@ actor {
       num := num / 2;
     };
     return res;
+  };
+
+  // challenge 4 capitalize_character
+  public func capitalize_character(c : Char) : async Text {
+    let char : Nat32 = Char.toNat32(c);
+    var res : Char = Char.fromNat32(char - 32);
+    return Text.fromChar(res);
+  };
+
+  // challenge 5 capitalize_text
+  // public func capitalize_text(t : Text) : async Text { // to refactor
+  //   var res : Text = "";
+  //   for(c in t.chars()) {
+  //     let char : Nat32 = Char.toNat32(c);
+  //   };
+  //   return res;
+  // };
+
+  // challenge 6 is_inside
+  public func is_inside(t : Text, c : Char) : async Bool {
+    for (char in t.chars()) {
+      if (char == c) {
+        return true;
+      };
+    };
+    return false;
+  };
+
+  // challenge 7 trim_whitespace
+  public func trim_whitespace(t : Text) : async Text {
+    var res : Text = "";
+    var textChar : Text = "";
+    let whitespace : Char = ' '; 
+      for(char in t.chars()) {
+        if (char != whitespace) {
+          textChar := Char.toText(char);
+          res := Text.concat(res, textChar);
+        };
+      };
+    return res;
+  };
+
+
+
+  // return the character corresponding to the unicode value n
+  public func unicode_to_character(n : Nat32) : async Text {
+    let char : Char = Char.fromNat32(n);
+    return(Char.toText(char));
   };
 
 };

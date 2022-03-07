@@ -41,13 +41,18 @@ actor {
   };
 
   // challenge 5 capitalize_text
-  // public func capitalize_text(t : Text) : async Text { // to refactor
-  //   var res : Text = "";
-  //   for(c in t.chars()) {
-  //     let char : Nat32 = Char.toNat32(c);
-  //   };
-  //   return res;
-  // };
+  public func capitalize_text(t : Text) : async Text {
+    var res : Text = "";
+    var charNum : Nat32 = 0;
+    var charCapital : Text = "";
+
+    for(char in t.chars()) {
+      charNum := Char.toNat32(char);
+      charCapital := Text.fromChar(Char.fromNat32(charNum - 32));
+      res := Text.concat(res, charCapital);
+    };
+    return res;
+  };
 
   // challenge 6 is_inside
   public func is_inside(t : Text, c : Char) : async Bool {
@@ -61,19 +66,29 @@ actor {
 
   // challenge 7 trim_whitespace
   public func trim_whitespace(t : Text) : async Text {
-    var res : Text = "";
+    let whitespace : Char = ' ';
     var textChar : Text = "";
-    let whitespace : Char = ' '; 
-      for(char in t.chars()) {
-        if (char != whitespace) {
-          textChar := Char.toText(char);
-          res := Text.concat(res, textChar);
-        };
+    var res : Text = "";
+    
+    for (char in t.chars()) {
+      if (char != whitespace) {
+        textChar := Char.toText(char);
+        res := Text.concat(res, textChar);
       };
+    };
     return res;
   };
 
-
+  // challenge 8 duplicated_character
+  // public func duplicated_character(t : Text) : async Text {
+  //   for (char in t.chars()) {
+  //     var str : ?Text = Text.stripStart(t, #char char);
+  //     if (Text.contains(str, #char char)) {
+  //       return Char.toText(char);
+  //     };
+  //   };
+  //   return t;
+  // };
 
   // return the character corresponding to the unicode value n
   public func unicode_to_character(n : Nat32) : async Text {

@@ -7,6 +7,10 @@
 		"day2": {
 			"type": "motoko",
 			"main": "day2.mo"
+		},
+		"day3": {
+			"type": "motoko",
+			"main": "day3.mo"
 		}
 	},
 	"defaults": {

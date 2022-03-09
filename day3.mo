@@ -36,7 +36,6 @@ actor {
       arr[i] := i;
       i += 1;
     };
-
     return Array.freeze<Nat>(arr); // convert to immutable arr
   };
 
@@ -138,8 +137,17 @@ actor {
 
   // challenge 9 increase_by_index
   public func increase_by_index(arr : [Nat]) : async [Nat] {
-
+    let inc = func(n : Nat, i : Nat) : Nat {
+      return n + i;
+    };
+    return Array.mapEntries(arr, inc);
   };
+
+  // challenge 10 contains<A>
+  // public func contains<A>(arr : [A], a : A, f : (A, A) -> Bool) : async Bool {
+  //   return true;
+  // };
+
 
   // etc
 
@@ -165,7 +173,4 @@ actor {
       };
     };
   };
-
-
-
 };

@@ -79,17 +79,17 @@ actor {
   };
 
   // challenge 6 populate_array
-  // public func populate_array(arr : [?Nat]) : async [Nat] {
-  //   let filter = func(?n : ?Nat) : Nat {
-  //     if (?n == null) {
-  //       return 0;
-  //     };
-  //     return n;
-  //   };
+  public func populate_array(arr : [?Nat]) : async [Nat] {
+    let populate = func(n : ?Nat) : Nat {
+      switch (n) {
+        case (null) 0;
+        case (?exists) exists;
+      };
+    };
 
-  //   let res = Array.map(arr, filter);
-  //   return res;
-  // };
+    let res = Array.map<?Nat, Nat>(arr, populate);
+    return res;
+  };
 
   // challenge 7 sum_of_array
   public func sum_of_array(arr : [Nat]) : async Nat {

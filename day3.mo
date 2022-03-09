@@ -65,34 +65,6 @@ actor {
   };
 
   // challenge 5 day_of_the_week
-  public func day_of_the_week(n : Nat) : async ?Text {
-    switch (n) {
-      case (1) {
-        return ?"Monday";
-      };
-      case (2) {
-        return ?"Tuesday";
-      };
-      case (3) {
-        return ?"Wednesday";
-      };
-      case (4) {
-        return ?"Thursday";
-      };
-      case (5) {
-        return ?"Friday";
-      };
-      case (6) {
-        return ?"Saturday";
-      };
-      case (7) {
-        return ?"Sunday";
-      };
-      case default null;
-    };
-  };
-
-  // challenge 5 day_of_the_week refactored
   public func day_of_the_week2(n : Nat) : async ?Text {
     switch (n) {
       case (1) ?"Monday";
@@ -144,9 +116,18 @@ actor {
   };
 
   // challenge 10 contains<A>
-  // public func contains<A>(arr : [A], a : A, f : (A, A) -> Bool) : async Bool {
-  //   return true;
-  // };
+  func contains<A>(arr : [A], a : A, f : ((A, A)) -> Bool) : Bool { // should be not public because type can be only for private functions, return type should not be async
+    for (val in arr.vals()) {
+      if (f(val, a)) {
+        return true;
+      };
+    };
+    return false;
+  };
+
+  public query func testContains(arr : [Nat], a : Nat) : async Bool {
+    return contains<Nat>(arr, a, func(a, b) {a == b});
+  };
 
 
   // etc

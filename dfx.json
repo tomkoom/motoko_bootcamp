@@ -14,7 +14,7 @@
 		},
 		"day4": {
 			"type": "motoko",
-			"main": "day4.mo"
+			"main": "day4/main.mo"
 		},
 		"day5": {
 			"type": "motoko",

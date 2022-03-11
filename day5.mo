@@ -1,3 +1,4 @@
+import Cycles "mo:base/ExperimentalCycles";
 import HashMap "mo:base/HashMap";
 import Principal "mo:base/Principal";
 
@@ -38,6 +39,34 @@ actor {
     };
   };
 
+  // challenge 5
+  public shared(msg) func update_favorite_number(n : Nat) : async ?Nat {
+    let principal = msg.caller;
+    return favoriteNumber.replace(principal, n);
+  };
+
+  public shared(msg) func delete_favorite_number() : async Text {
+    let principal = msg.caller;
+    if (favoriteNumber.get(principal) == null) {
+      return "There is no favorite number associated with this caller";
+    } else {
+      favoriteNumber.delete(principal);
+      return "Favorite number deleted";
+    };
+  };
+
+  // challenge 6
+  // challenge 7
+
+  // challenge 8
+  stable var counter : Nat = 0;
+  // stable var versionNumber : Nat = 0;
+
+  public func increment_counter(n : Nat) : async Nat {
+    counter += n;
+    return counter;
+  };
+
   // etc
 
   // who am i
@@ -52,4 +81,21 @@ actor {
 
   // anonymous principal - "2vxsx-fae"
 
+  public func balance() : async Nat {
+    return(Cycles.balance())
+  };
+
+  public func message_available() : async Nat {
+    return(Cycles.available())
+  };
+
+  let AMOUNT_TO_PAY : Nat = 100_000;
+
+  public func pay_to_access() : async Text {
+    if(Cycles.available() < 100_000) {
+      return("This is not enough, send more cycles.");
+    };
+  let received = Cycles.accept(AMOUNT_TO_PAY);
+  return("Thanks for paying, you are now a premium user 😎");
+  };
 };
